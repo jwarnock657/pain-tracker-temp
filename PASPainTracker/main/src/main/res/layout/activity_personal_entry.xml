@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".PersonalEntry">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/PersonalEntryTitle"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:text="PERSONAL DETAILS"
+            android:textColor="#ffffff"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/PersonalEntryDescription"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="ENTER THE FOLLOWING DETAILS:"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/nameEntry"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/input_rounded"
+            android:layout_marginBottom="25dp"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:text="NAME" />
+
+        <EditText
+            android:id="@+id/dateEntry"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/input_rounded"
+            android:gravity="center"
+            android:inputType="date"
+            android:text="DATE OF BIRTH (D/M/Y)" />
+
+        <EditText
+            android:id="@+id/genderEntry"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/input_rounded"
+            android:layout_marginBottom="50dp"
+            android:gravity="center"
+            android:inputType="text"
+            android:text="GENDER" />
+
+        <Button
+            android:id="@+id/btnSubmitPersonalData"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_rounded"
+            android:text="SUBMIT"
+            android:textColor="@color/buttonText" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

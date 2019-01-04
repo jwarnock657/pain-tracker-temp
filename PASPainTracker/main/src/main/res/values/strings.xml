@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome_message">HELLO, USER!</string>
+    <string name="pas_logo">PAIN ASSOCIATION SCOTLAND</string>
+    <string name="start_message">WELCOME TO PAS PAIN TRACKER!</string>
+</resources>

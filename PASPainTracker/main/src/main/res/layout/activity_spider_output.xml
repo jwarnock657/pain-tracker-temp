@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".SpiderInput">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/SpiderInputTitle"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:text="PAS SPIDER - OUTPUT"
+            android:textColor="#ffffff"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/spiderQuestion1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="1: HOW WELL DO YOU DEAL WITH PAIN?"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/spiderAnswer1"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="ANSWER: 2"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:background="@drawable/input_rounded"
+            android:layout_marginBottom="25dp" />
+
+        <TextView
+            android:id="@+id/spiderQuestion2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="2: HOW WELL CAN YOU RELAX?"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/spiderAnswer2"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="ANSWER: 5"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:background="@drawable/input_rounded"
+            android:layout_marginBottom="25dp" />
+
+        <TextView
+            android:id="@+id/spiderQuestion3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="3: HOW WELL DO YOU CONTROL STRESS?"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/spiderAnswer3"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="ANSWER: 8"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:background="@drawable/input_rounded"
+            android:layout_marginBottom="25dp" />
+
+        <Button
+            android:id="@+id/btnGoHome"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_rounded"
+            android:text="HOME"
+            android:textColor="@color/buttonText" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
