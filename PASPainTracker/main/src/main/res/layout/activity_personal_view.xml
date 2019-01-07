@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".PersonalEntry">
+    tools:context=".PersonalView">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/PersonalEntryTitle"
+            android:id="@+id/PersonalViewTitle"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:gravity="center"
@@ -22,54 +22,67 @@
             android:textSize="25sp" />
 
         <TextView
-            android:id="@+id/PersonalEntryDescription"
+            android:id="@+id/PersonalViewDescription"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center"
-            android:text="ENTER THE FOLLOWING DETAILS:"
+            android:text="YOUR PERSONAL DETAILS:"
             android:textColor="#ffffff"
             android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/nameEntry"
+        <TextView
+            android:id="@+id/nameView"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/input_rounded"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:inputType="textPersonName"
-            android:text="NAME" />
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:text="NAME: " />
 
-        <EditText
-            android:id="@+id/surnameEntry"
+        <TextView
+            android:id="@+id/surnameView"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/input_rounded"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:inputType="textPersonName"
-            android:text="SURNAME" />
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:text="SURNAME: " />
 
-        <EditText
-            android:id="@+id/dateEntry"
+        <TextView
+            android:id="@+id/dateView"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="25dp"
             android:background="@drawable/input_rounded"
             android:gravity="center"
-            android:inputType="date"
-            android:text="DATE OF BIRTH (DD/MM/YYYY)" />
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:text="DATE OF BIRTH: " />
 
         <Button
-            android:id="@+id/btnSubmitPersonalData"
+            android:id="@+id/btnChangePersonalData"
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:background="@drawable/btn_rounded"
-            android:text="SUBMIT"
+            android:text="CHANGE"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/buttonText" />
+
+        <Button
+            android:id="@+id/btnGoHome"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_rounded"
+            android:text="HOME"
             android:textColor="@color/buttonText" />
 
     </LinearLayout>

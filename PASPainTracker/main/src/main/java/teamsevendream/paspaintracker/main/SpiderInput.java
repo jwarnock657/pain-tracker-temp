@@ -42,7 +42,14 @@ public class SpiderInput extends AppCompatActivity {
     }
 
     public void AddData(int answer1, int answer2, int answer3){
-        boolean insertData = mDatabaseHelper.addSpiderData(answer1, answer2, answer3);
+        boolean empty = mDatabaseHelper.checkTableSpiderDataEmpty();
+        boolean insertData;
+        if(empty) {
+            insertData = mDatabaseHelper.createSpiderData(answer1, answer2, answer3);
+        }
+        else {
+            insertData = mDatabaseHelper.updateSpiderData(answer1, answer2, answer3);
+        }
 
         if(insertData){
             toastMessage("Data added successfully!");

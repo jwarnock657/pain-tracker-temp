@@ -17,16 +17,27 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper mDatabaseHelper;
     private TextView welcomeMessage;
+    private Button btnRecordSpider;
     private Button btnViewSpider;
+    private Button btnViewPersonalDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         welcomeMessage = findViewById(R.id.WelcomeMessage);
+        btnRecordSpider = findViewById(R.id.btnRecordSpider);
         btnViewSpider = findViewById(R.id.btnViewSpider);
+        btnViewPersonalDetails = findViewById(R.id.btnViewPersonalDetails);
         mDatabaseHelper = new DatabaseHelper(this);
-        welcomeMessage.setText(getMessage());
+        setWelcomeMessage();
+
+        btnRecordSpider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                startActivity(new Intent(MainActivity.this, SpiderInput.class));
+            }
+        });
 
         btnViewSpider.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,14 +45,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, SpiderOutput.class));
             }
         });
+
+        btnViewPersonalDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                startActivity(new Intent(MainActivity.this, PersonalView.class));
+            }
+        });
     }
 
-
-    private String getMessage() {
-        String data = mDatabaseHelper.getPersonal();
-        String message = "WELCOME, " + data;
-        Log.d(TAG, "Message: " + message);
-        return message;
+    private void setWelcomeMessage() {
+        List<String> data = mDatabaseHelper.getUserData();
+        welcomeMessage.setText("WELCOME, " + data.get(0));
     }
 
 }

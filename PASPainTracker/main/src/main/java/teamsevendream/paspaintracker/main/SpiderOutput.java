@@ -15,7 +15,7 @@ import java.util.List;
 
 public class SpiderOutput extends AppCompatActivity {
 
-    private static String TAG = "SpiderInput";
+    private static String TAG = "SpiderOutput";
 
     DatabaseHelper mDatabaseHelper;
     private Button btnGoHome;
@@ -31,7 +31,7 @@ public class SpiderOutput extends AppCompatActivity {
         spiderAnswer3 = findViewById(R.id.spiderAnswer3);
         btnGoHome = findViewById(R.id.btnGoHome);
         mDatabaseHelper = new DatabaseHelper(this);
-        getSpiderData();
+        viewSpiderOutput();
 
         btnGoHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,13 +41,11 @@ public class SpiderOutput extends AppCompatActivity {
         });
     }
 
-    private void getSpiderData() {
-        List<Integer> data = mDatabaseHelper.getSpider();
-        String message = "WELCOME, " + data.get(0);
+    private void viewSpiderOutput() {
+        List<Integer> data = mDatabaseHelper.getSpiderData();
         spiderAnswer1.setText("Answer: " + data.get(0).toString());
         spiderAnswer2.setText("Answer: " + data.get(1).toString());
         spiderAnswer3.setText("Answer: " + data.get(2).toString());
-        Log.d(TAG, "Message: " + message);
     }
 
 }

@@ -16,16 +16,16 @@ public class PersonalEntry extends AppCompatActivity {
     DatabaseHelper mDatabaseHelper;
     private Button btnSubmitPersonalData;
     private EditText nameEntry;
+    private EditText surnameEntry;
     private EditText dateEntry;
-    private EditText genderEntry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_entry);
         nameEntry = findViewById(R.id.nameEntry);
+        surnameEntry = findViewById(R.id.surnameEntry);
         dateEntry = findViewById(R.id.dateEntry);
-        genderEntry = findViewById(R.id.genderEntry);
         btnSubmitPersonalData = findViewById(R.id.btnSubmitPersonalData);
         Log.d(TAG, "Creating database...");
         mDatabaseHelper = new DatabaseHelper(this);
@@ -34,27 +34,42 @@ public class PersonalEntry extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = nameEntry.getText().toString();
+                String surname = surnameEntry.getText().toString();
                 String dateOfBirth = dateEntry.getText().toString();
-                String gender = genderEntry.getText().toString();
-                if(nameEntry.length() != 0 && dateEntry.length() != 0 && genderEntry.length() != 0){
+                if(nameEntry.length() != 0 && surnameEntry.length() != 0 && dateEntry.length() != 0) {
                     nameEntry.setText("");
+                    surnameEntry.setText("");
                     dateEntry.setText("");
-                    genderEntry.setText("");
-                    AddData(name, dateOfBirth, gender);
+                    AddData(name, surname, dateOfBirth);
                 }
-                else{
+                else {
                     toastMessage("You must fill all the fields!");
                 }
             }
         });
     }
 
-    public void AddData(String name, String dateOfBirth, String gender){
-        boolean insertData = mDatabaseHelper.addPersonalData(name, dateOfBirth, gender);
+    public void AddData(String name, String surname, String dateOfBirth){
+        boolean empty = mDatabaseHelper.checkTableUserDataEmpty();
+        boolean insertData;
+        boolean checkStart;
+        if(empty) {
+            insertData = mDatabaseHelper.createUserData(name, surname, dateOfBirth);
+            checkStart = true;
+        }
+        else {
+            insertData = mDatabaseHelper.updateUserData(name, surname, dateOfBirth);
+            checkStart = false;
+        }
 
         if(insertData){
             toastMessage("Data added successfully!");
-            startActivity(new Intent(PersonalEntry.this, SpiderInput.class));
+            if(checkStart) {
+                startActivity(new Intent(PersonalEntry.this, SpiderInput.class));
+            }
+            else {
+                startActivity(new Intent(PersonalEntry.this, MainActivity.class));
+            }
         }
         else{
             toastMessage("Error with insertion!");

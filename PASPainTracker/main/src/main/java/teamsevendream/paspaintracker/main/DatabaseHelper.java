@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,113 +13,166 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHelper";
 
-    private static final String TABLE_NAME = "userTable";
-    private static final String COL1 = "name";
-    private static final String COL2 = "dateOfBirth";
-    private static final String COL3 = "gender";
-    private static final String COL4 = "answer1";
-    private static final String COL5 = "answer2";
-    private static final String COL6 = "answer3";
+    private static final String DATABASE_NAME = "PASPainTrackerDatabase";
+    private static final int DATABASE_VERSION = 1;
+
+    private static final String TABLE_USER_DATA = "userData";
+    private static final String USER_ID = "userID";
+    private static final String USER_NAME = "name";
+    private static final String USER_SURNAME = "surname";
+    private static final String USER_DOB = "dateOfBirth";
+
+    private static final String TABLE_SPIDER_DATA = "spiderData";
+    private static final String SPIDER_ID = "spiderID";
+    private static final String SPIDER_QUESTION1 = "question1";
+    private static final String SPIDER_QUESTION2 = "question2";
+    private static final String SPIDER_QUESTION3 = "question3";
+
+    private static final String CREATE_TABLE_USER_DATA = "CREATE TABLE " + TABLE_USER_DATA + " (" + USER_ID + " INTEGER PRIMARY KEY, " +
+            USER_NAME + " TEXT, " + USER_SURNAME + " TEXT, " + USER_DOB + " DATE" + ");";
+
+    private static final String CREATE_TABLE_SPIDER_DATA = "CREATE TABLE " + TABLE_SPIDER_DATA + " (" + SPIDER_ID + " INTEGER PRIMARY KEY, " +
+            SPIDER_QUESTION1 + " INTEGER, " + SPIDER_QUESTION2 + " INTEGER, " + SPIDER_QUESTION3 + " INTEGER" + ");";
 
     public DatabaseHelper(Context context){
-        super(context, TABLE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        Log.d(TAG, "Creating...");
-        String createTable = "CREATE TABLE " + DatabaseHelper.TABLE_NAME + " (" + DatabaseHelper.COL1 + " PRIMARY KEY, "
-                + DatabaseHelper.COL2 + " DATE, " + DatabaseHelper.COL3 + " TEXT, " + DatabaseHelper.COL4 + " INT, "
-                + DatabaseHelper.COL5 + " INT, " + DatabaseHelper.COL6 + " INT" + ");";
-        Log.d(TAG, "Creating table...");
-        db.execSQL(createTable);
+        db.execSQL(CREATE_TABLE_USER_DATA);
+        db.execSQL(CREATE_TABLE_SPIDER_DATA);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER_DATA);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SPIDER_DATA);
+        onCreate(db);
     }
 
-    public boolean addPersonalData(String name, String dateOfBirth, String gender){
+    public boolean createUserData(String name, String surname, String dateOfBirth){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL1, name);
-        contentValues.put(COL2, dateOfBirth);
-        contentValues.put(COL3, gender);
+        contentValues.put(USER_NAME, name);
+        contentValues.put(USER_SURNAME, surname);
+        contentValues.put(USER_DOB, dateOfBirth);
 
-        Log.d(TAG, "addPersonalData: (NAME: " + name + ", DATE OF BIRTH: " + dateOfBirth + ", GENDER: " + gender + ") to " + TABLE_NAME);
+        Log.d(TAG, "createUserData: (NAME: " + name + ", SURNAME: " + surname + ", DATE OF BIRTH: " + dateOfBirth + ") to " + TABLE_USER_DATA);
 
-        long result = db.insert(TABLE_NAME, null, contentValues);
+        long result = db.insert(TABLE_USER_DATA, null, contentValues);
 
-        if(result == -1){
+        if(result == -1) {
             Log.e(TAG, "Error with insertion!");
             return false;
         }
-        else{
+        else {
             Log.d(TAG, "Data added successfully!");
             return true;
         }
     }
 
-    public boolean addSpiderData(int answer1, int answer2, int answer3){
+    public List<String> getUserData(){
+        Log.d(TAG, "Getting user data...");
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<String> userDataList = new ArrayList<String>();
+        String query = "SELECT * FROM " + TABLE_USER_DATA;
+        Cursor data = db.rawQuery(query, null);
+        data.moveToFirst();
+        Log.d(TAG, "Adding to userDataList...");
+        userDataList.add(data.getString(1));
+        userDataList.add(data.getString(2));
+        userDataList.add(data.getString(3));
+        data.close();
+        return userDataList;
+    }
+
+    public boolean updateUserData(String name, String surname, String dateOfBirth) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL4, answer1);
-        contentValues.put(COL5, answer2);
-        contentValues.put(COL6, answer3);
-
-        Log.d(TAG, "addSpiderData: (ANSWER1: " + answer1 + ", ANSWER2: " + answer2 + ", ANSWER3: " + answer3 + ") to " + TABLE_NAME);
-
-        long result = db.insert(TABLE_NAME, null, contentValues);
-
-        if(result == -1){
+        contentValues.put(USER_NAME, name);
+        contentValues.put(USER_SURNAME, surname);
+        contentValues.put(USER_DOB, dateOfBirth);
+        int result = db.update(TABLE_USER_DATA, contentValues, null, null);
+        if(result == 0) {
             Log.e(TAG, "Error with insertion!");
             return false;
         }
-        else{
+        else {
             Log.d(TAG, "Data added successfully!");
             return true;
         }
     }
 
-    public String getPersonal(){
-        Log.d(TAG, "Getting Personal data...");
+    public boolean checkTableUserDataEmpty() {
         SQLiteDatabase db = this.getWritableDatabase();
-        List<String> personalList = new ArrayList<String>();
-        String query = "SELECT * FROM " + TABLE_NAME;
+        String query = "SELECT * FROM " + TABLE_USER_DATA;
         Cursor data = db.rawQuery(query, null);
-
-        data.moveToNext();
-        String name = data.getString(0);
-
-        return name;
+        boolean empty = data.moveToFirst();
+        data.close();
+        return !empty;
     }
 
-    public List<Integer> getSpider(){
-        Log.d(TAG, "Getting Spider data...");
+    public boolean createSpiderData(int answer1, int answer2, int answer3){
         SQLiteDatabase db = this.getWritableDatabase();
-        List<Integer> spiderList = new ArrayList<Integer>();
-        String query = "SELECT * FROM " + TABLE_NAME;
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(SPIDER_QUESTION1, answer1);
+        contentValues.put(SPIDER_QUESTION2, answer2);
+        contentValues.put(SPIDER_QUESTION3, answer3);
+
+        Log.d(TAG, "createSpiderData: (QUESTION1: " + answer1 + ", QUESTION2: " + answer2 + ", QUESTION3: " + answer3 + ") to " + TABLE_SPIDER_DATA);
+
+        long result = db.insert(TABLE_SPIDER_DATA, null, contentValues);
+
+        if(result == -1) {
+            Log.e(TAG, "Error with insertion!");
+            return false;
+        }
+        else {
+            Log.d(TAG, "Data added successfully!");
+            return true;
+        }
+    }
+
+    public List<Integer> getSpiderData(){
+        Log.d(TAG, "Getting spider data...");
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<Integer> spiderDataList = new ArrayList<Integer>();
+        String query = "SELECT * FROM " + TABLE_SPIDER_DATA;
         Cursor data = db.rawQuery(query, null);
-        data.moveToPosition(1);
+        data.moveToFirst();
+        Log.d(TAG, "Adding to spiderList...");
+        spiderDataList.add(data.getInt(1));
+        spiderDataList.add(data.getInt(2));
+        spiderDataList.add(data.getInt(3));
+        data.close();
+        return spiderDataList;
+    }
 
-        Log.d(TAG, "Adding to spiderlist");
-        spiderList.add(data.getInt(3));
-        spiderList.add(data.getInt(4));
-        spiderList.add(data.getInt(5));
-//        int i = 0;
-//
-//        while(i < 6){
-//            if(i > 2){
-//                Log.d(TAG, "Loop");
-//                String sData = data.getString(0);
-//                spiderList.add(sData);
-//                Log.d(TAG, "Added: " + sData);
-//            }
-//            data.moveToNext();
-//            i += 1;
-//        }
+    public boolean updateSpiderData(int answer1, int answer2, int answer3) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(SPIDER_QUESTION1, answer1);
+        contentValues.put(SPIDER_QUESTION2, answer2);
+        contentValues.put(SPIDER_QUESTION3, answer3);
+        int result = db.update(TABLE_SPIDER_DATA, contentValues, null, null);
+        if(result == 0) {
+            Log.e(TAG, "Error with insertion!");
+            return false;
+        }
+        else {
+            Log.d(TAG, "Data added successfully!");
+            return true;
+        }
+    }
 
-        return spiderList;
+    public boolean checkTableSpiderDataEmpty() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_SPIDER_DATA;
+        Cursor data = db.rawQuery(query, null);
+        boolean empty = data.moveToFirst();
+        data.close();
+        return !empty;
     }
 
 }

@@ -56,8 +56,7 @@
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/btn_rounded"
             android:text="RECORD PAIN"
             android:textColor="@color/buttonText" />
@@ -67,9 +66,19 @@
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/btn_rounded"
             android:text="VIEW HISTORY"
+            android:textColor="@color/buttonText" />
+
+        <Button
+            android:id="@+id/btnRecordSpider"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/btn_rounded"
+            android:text="RECORD SPIDER"
             android:textColor="@color/buttonText" />
 
         <Button
@@ -77,8 +86,18 @@
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/btn_rounded"
             android:text="VIEW SPIDER"
+            android:textColor="@color/buttonText" />
+
+        <Button
+            android:id="@+id/btnViewPersonalDetails"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_rounded"
+            android:text="VIEW PERSONAL DETAILS"
             android:textColor="@color/buttonText" />
 
     </LinearLayout>

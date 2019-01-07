@@ -10,17 +10,25 @@ public class StartActivity extends AppCompatActivity {
 
     private static String TAG = "StartActivity";
 
+    DatabaseHelper mDatabaseHelper;
     private Button btnGetStarted;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         btnGetStarted = findViewById(R.id.btnGetStarted);
+        mDatabaseHelper = new DatabaseHelper(this);
 
         btnGetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(StartActivity.this, PersonalEntry.class));
+                boolean empty = mDatabaseHelper.checkTableUserDataEmpty();
+                if(empty) {
+                    startActivity(new Intent(StartActivity.this, PersonalEntry.class));
+                }
+                else {
+                    startActivity(new Intent(StartActivity.this, MainActivity.class));
+                }
             }
         });
     }
