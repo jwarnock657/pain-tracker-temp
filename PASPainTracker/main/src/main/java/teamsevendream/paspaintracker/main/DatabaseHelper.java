@@ -27,12 +27,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String SPIDER_QUESTION1 = "question1";
     private static final String SPIDER_QUESTION2 = "question2";
     private static final String SPIDER_QUESTION3 = "question3";
+    private static final String SPIDER_QUESTION4 = "question4";
+    private static final String SPIDER_QUESTION5 = "question5";
+    private static final String SPIDER_QUESTION6 = "question6";
+    private static final String SPIDER_QUESTION7 = "question7";
+    private static final String SPIDER_QUESTION8 = "question8";
+    private static final String SPIDER_QUESTION9 = "question9";
+    private static final String SPIDER_QUESTION10 = "question10";
+    private static final String SPIDER_QUESTION11 = "question11";
+    private static final String SPIDER_QUESTION12 = "question12";
 
     private static final String CREATE_TABLE_USER_DATA = "CREATE TABLE " + TABLE_USER_DATA + " (" + USER_ID + " INTEGER PRIMARY KEY, " +
             USER_NAME + " TEXT, " + USER_SURNAME + " TEXT, " + USER_DOB + " DATE" + ");";
 
     private static final String CREATE_TABLE_SPIDER_DATA = "CREATE TABLE " + TABLE_SPIDER_DATA + " (" + SPIDER_ID + " INTEGER PRIMARY KEY, " +
-            SPIDER_QUESTION1 + " INTEGER, " + SPIDER_QUESTION2 + " INTEGER, " + SPIDER_QUESTION3 + " INTEGER" + ");";
+            SPIDER_QUESTION1 + " INTEGER, " + SPIDER_QUESTION2 + " INTEGER, " + SPIDER_QUESTION3 + " INTEGER, " + SPIDER_QUESTION4
+            + " INTEGER" + ");";
+//    + SPIDER_QUESTION5 + " INTEGER, " + SPIDER_QUESTION6 + " INTEGER, " + SPIDER_QUESTION7 + " INTEGER, "
+//            + SPIDER_QUESTION8 + " INTEGER, " + SPIDER_QUESTION9 + " INTEGER, " + SPIDER_QUESTION10 + " INTEGER, " + SPIDER_QUESTION11
+//            + " INTEGER, " + SPIDER_QUESTION12 + " INTEGER" + ");";
 
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -113,14 +126,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return !empty;
     }
 
-    public boolean createSpiderData(int answer1, int answer2, int answer3){
+    public boolean createSpiderData(int answer1, int answer2, int answer3, int answer4){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(SPIDER_QUESTION1, answer1);
         contentValues.put(SPIDER_QUESTION2, answer2);
         contentValues.put(SPIDER_QUESTION3, answer3);
+        contentValues.put(SPIDER_QUESTION4, answer4);
 
-        Log.d(TAG, "createSpiderData: (QUESTION1: " + answer1 + ", QUESTION2: " + answer2 + ", QUESTION3: " + answer3 + ") to " + TABLE_SPIDER_DATA);
+        Log.d(TAG, "createSpiderData: (QUESTION1: " + answer1 + ", QUESTION2: " + answer2 + ", QUESTION3: " + answer3 + " QUESTION4: " + answer4 + ") to " + TABLE_SPIDER_DATA);
 
         long result = db.insert(TABLE_SPIDER_DATA, null, contentValues);
 
@@ -145,16 +159,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         spiderDataList.add(data.getInt(1));
         spiderDataList.add(data.getInt(2));
         spiderDataList.add(data.getInt(3));
+        spiderDataList.add(data.getInt(4));
         data.close();
         return spiderDataList;
     }
 
-    public boolean updateSpiderData(int answer1, int answer2, int answer3) {
+    public boolean updateSpiderData(int answer1, int answer2, int answer3, int answer4) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(SPIDER_QUESTION1, answer1);
         contentValues.put(SPIDER_QUESTION2, answer2);
         contentValues.put(SPIDER_QUESTION3, answer3);
+        contentValues.put(SPIDER_QUESTION4, answer4);
         int result = db.update(TABLE_SPIDER_DATA, contentValues, null, null);
         if(result == 0) {
             Log.e(TAG, "Error with insertion!");
