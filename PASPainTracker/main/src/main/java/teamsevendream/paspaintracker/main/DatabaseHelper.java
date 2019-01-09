@@ -37,6 +37,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String SPIDER_QUESTION11 = "question11";
     private static final String SPIDER_QUESTION12 = "question12";
 
+    private static final String TABLE_PAIN_DATA = "painData";
+    private static final String PAIN_ID = "painID";
+    private static final String PAIN_DATA = "painData";
+    private static final String INTENSITY = "intensity";
+    private static final String AREA = "area";
+    private static final String DETAILS = "details";
+    private static final String WHAT_HELPED = "whatHelped";
+    private static final String WHAT_DOING = "whatDoing";
+
+
+
     private static final String CREATE_TABLE_USER_DATA = "CREATE TABLE " + TABLE_USER_DATA + " (" + USER_ID + " INTEGER PRIMARY KEY, " +
             USER_NAME + " TEXT, " + USER_SURNAME + " TEXT, " + USER_DOB + " DATE" + ");";
 
@@ -47,6 +58,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //            + SPIDER_QUESTION8 + " INTEGER, " + SPIDER_QUESTION9 + " INTEGER, " + SPIDER_QUESTION10 + " INTEGER, " + SPIDER_QUESTION11
 //            + " INTEGER, " + SPIDER_QUESTION12 + " INTEGER" + ");";
 
+    private static final String CREATE_TABLE_PAIN_DATA = "CREATE TABLE " + TABLE_PAIN_DATA + " (" + PAIN_ID + " INTEGER PRIMARY KEY, "
+            + PAIN_DATA + " TEXT, " + INTENSITY + " INTEGER, " + AREA + " TEXT, " + DETAILS + " TEXT, " + WHAT_HELPED + " TEXT, "
+            + WHAT_DOING + " TEXT" + ");";
+
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -55,14 +70,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
         db.execSQL(CREATE_TABLE_USER_DATA);
         db.execSQL(CREATE_TABLE_SPIDER_DATA);
+        db.execSQL(CREATE_TABLE_PAIN_DATA);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER_DATA);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SPIDER_DATA);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PAIN_DATA);
         onCreate(db);
     }
+
+    public boolean createPainData(int intensity, String area, String details, String what_helped, String what_doing){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(INTENSITY, intensity);
+        contentValues.put(AREA, area);
+        contentValues.put(DETAILS, details);
+        contentValues.put(WHAT_HELPED, what_helped);
+        contentValues.put(WHAT_DOING, what_doing);
+
+        long result = db.insert(TABLE_PAIN_DATA, null, contentValues);
+
+        if(result == -1) {
+            Log.e(TAG, "Error with insertion!");
+            return false;
+        }
+        else {
+            Log.d(TAG, "Pain Data added successfully!");
+            return true;
+        }
+    }
+
+
 
     public boolean createUserData(String name, String surname, String dateOfBirth){
         SQLiteDatabase db = this.getWritableDatabase();
