@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class PersonalEntry extends AppCompatActivity {
 
     private static String TAG = "PersonalEntry";
@@ -29,6 +31,7 @@ public class PersonalEntry extends AppCompatActivity {
         btnSubmitPersonalData = findViewById(R.id.btnSubmitPersonalData);
         Log.d(TAG, "Creating database...");
         mDatabaseHelper = new DatabaseHelper(this);
+        getUserData();
 
         btnSubmitPersonalData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,4 +83,13 @@ public class PersonalEntry extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+    private void getUserData() {
+        if(!mDatabaseHelper.checkTableUserDataEmpty()){
+            List<String> data = mDatabaseHelper.getUserData();
+            nameEntry.setText(data.get(0));
+            surnameEntry.setText(data.get(1));
+            dateEntry.setText(data.get(2));
+        }
+
+    }
 }

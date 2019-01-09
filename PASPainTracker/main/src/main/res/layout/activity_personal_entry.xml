@@ -39,7 +39,7 @@
             android:layout_marginBottom="25dp"
             android:gravity="center"
             android:inputType="textPersonName"
-            android:text="NAME" />
+            android:hint="NAME" />
 
         <EditText
             android:id="@+id/surnameEntry"
@@ -50,7 +50,7 @@
             android:layout_marginBottom="25dp"
             android:gravity="center"
             android:inputType="textPersonName"
-            android:text="SURNAME" />
+            android:hint="SURNAME" />
 
         <EditText
             android:id="@+id/dateEntry"
@@ -61,7 +61,7 @@
             android:background="@drawable/input_rounded"
             android:gravity="center"
             android:inputType="date"
-            android:text="DATE OF BIRTH (DD/MM/YYYY)" />
+            android:hint="DATE OF BIRTH (DD/MM/YYYY)" />
 
         <Button
             android:id="@+id/btnSubmitPersonalData"
