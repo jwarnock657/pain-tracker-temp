@@ -44,8 +44,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String AREA = "area";
     private static final String DETAILS = "details";
     private static final String WHAT_HELPED = "whatHelped";
-    private static final String WHAT_DOING = "whatDoing";
-
+    private static final String DATE = "date";
+    //private static final String WHAT_DOING = "whatDoing";
 
 
     private static final String CREATE_TABLE_USER_DATA = "CREATE TABLE " + TABLE_USER_DATA + " (" + USER_ID + " INTEGER PRIMARY KEY, " +
@@ -58,9 +58,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //            + SPIDER_QUESTION8 + " INTEGER, " + SPIDER_QUESTION9 + " INTEGER, " + SPIDER_QUESTION10 + " INTEGER, " + SPIDER_QUESTION11
 //            + " INTEGER, " + SPIDER_QUESTION12 + " INTEGER" + ");";
 
+    /*
     private static final String CREATE_TABLE_PAIN_DATA = "CREATE TABLE " + TABLE_PAIN_DATA + " (" + PAIN_ID + " INTEGER PRIMARY KEY, "
             + PAIN_DATA + " TEXT, " + INTENSITY + " INTEGER, " + AREA + " TEXT, " + DETAILS + " TEXT, " + WHAT_HELPED + " TEXT, "
             + WHAT_DOING + " TEXT" + ");";
+     */
+
+    private static final String CREATE_TABLE_PAIN_DATA = "CREATE TABLE " + TABLE_PAIN_DATA + " (" + PAIN_ID + " INTEGER PRIMARY KEY, "
+            + INTENSITY + " INTEGER, " + AREA + " TEXT, " + DETAILS + " TEXT, " + WHAT_HELPED + " TEXT, " + DATE + " TEXT" + ");";
 
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -81,14 +86,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean createPainData(int intensity, String area, String details, String what_helped, String what_doing){
+    public boolean createPainData(int intensity, String area, String details, String what_helped, String date){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(INTENSITY, intensity);
         contentValues.put(AREA, area);
         contentValues.put(DETAILS, details);
         contentValues.put(WHAT_HELPED, what_helped);
-        contentValues.put(WHAT_DOING, what_doing);
+        contentValues.put(DATE, date);
+        //contentValues.put(WHAT_DOING, what_doing)
 
         long result = db.insert(TABLE_PAIN_DATA, null, contentValues);
 

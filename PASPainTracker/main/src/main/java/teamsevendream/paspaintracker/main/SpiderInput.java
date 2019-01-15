@@ -45,10 +45,10 @@ public class SpiderInput extends AppCompatActivity {
         boolean empty = mDatabaseHelper.checkTableSpiderDataEmpty();
         boolean insertData;
         if(empty) {
-            insertData = mDatabaseHelper.createSpiderData(answer1, answer2, answer3);
+            insertData = mDatabaseHelper.createSpiderData(answer1, answer2, answer3,5);
         }
         else {
-            insertData = mDatabaseHelper.updateSpiderData(answer1, answer2, answer3);
+            insertData = mDatabaseHelper.updateSpiderData(answer1, answer2, answer3,6);
         }
 
         if(insertData){
