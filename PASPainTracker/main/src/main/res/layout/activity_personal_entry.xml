@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -35,22 +34,22 @@
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:background="@drawable/input_rounded"
             android:layout_marginBottom="25dp"
+            android:background="@drawable/input_rounded"
             android:gravity="center"
-            android:inputType="textPersonName"
-            android:hint="NAME" />
+            android:hint="NAME"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/surnameEntry"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:background="@drawable/input_rounded"
             android:layout_marginBottom="25dp"
+            android:background="@drawable/input_rounded"
             android:gravity="center"
-            android:inputType="textPersonName"
-            android:hint="SURNAME" />
+            android:hint="SURNAME"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/dateEntry"
@@ -60,8 +59,8 @@
             android:layout_marginBottom="50dp"
             android:background="@drawable/input_rounded"
             android:gravity="center"
-            android:inputType="date"
-            android:hint="DATE OF BIRTH (DD/MM/YYYY)" />
+            android:hint="DATE OF BIRTH (DD/MM/YYYY)"
+            android:inputType="date" />
 
         <Button
             android:id="@+id/btnSubmitPersonalData"

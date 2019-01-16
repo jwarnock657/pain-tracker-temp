@@ -22,6 +22,7 @@
         <activity android:name=".PersonalView" />
         <activity android:name=".SpiderInput" />
         <activity android:name=".SpiderOutput" />
+        <activity android:name=".RecordPain" />
     </application>
 
 </manifest>

@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnRecordSpider;
     private Button btnViewSpider;
     private Button btnViewPersonalDetails;
+    private Button btnRecordPain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         btnRecordSpider = findViewById(R.id.btnRecordSpider);
         btnViewSpider = findViewById(R.id.btnViewSpider);
         btnViewPersonalDetails = findViewById(R.id.btnViewPersonalDetails);
+        btnRecordPain = findViewById(R.id.btnRecordPain);
         mDatabaseHelper = new DatabaseHelper(this);
         setWelcomeMessage();
 
@@ -50,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 startActivity(new Intent(MainActivity.this, PersonalView.class));
+            }
+        });
+
+        btnRecordPain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                startActivity(new Intent(MainActivity.this, RecordPain.class));
             }
         });
     }
