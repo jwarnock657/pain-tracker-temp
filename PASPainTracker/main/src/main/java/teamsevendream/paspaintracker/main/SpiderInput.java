@@ -20,6 +20,16 @@ public class SpiderInput extends AppCompatActivity {
     private SeekBar spiderAnswer1;
     private SeekBar spiderAnswer2;
     private SeekBar spiderAnswer3;
+    private SeekBar spiderAnswer4;
+    private SeekBar spiderAnswer5;
+    private SeekBar spiderAnswer6;
+    private SeekBar spiderAnswer7;
+    private SeekBar spiderAnswer8;
+    private SeekBar spiderAnswer9;
+    private SeekBar spiderAnswer10;
+    private SeekBar spiderAnswer11;
+    private SeekBar spiderAnswer12;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +37,15 @@ public class SpiderInput extends AppCompatActivity {
         spiderAnswer1 = findViewById(R.id.spiderAnswer1);
         spiderAnswer2 = findViewById(R.id.spiderAnswer2);
         spiderAnswer3 = findViewById(R.id.spiderAnswer3);
+        spiderAnswer4 = findViewById(R.id.spiderAnswer4);
+        spiderAnswer5 = findViewById(R.id.spiderAnswer5);
+        spiderAnswer6 = findViewById(R.id.spiderAnswer6);
+        spiderAnswer7 = findViewById(R.id.spiderAnswer7);
+        spiderAnswer8 = findViewById(R.id.spiderAnswer8);
+        spiderAnswer9 = findViewById(R.id.spiderAnswer9);
+        spiderAnswer10 = findViewById(R.id.spiderAnswer10);
+        spiderAnswer11 = findViewById(R.id.spiderAnswer11);
+        spiderAnswer12 = findViewById(R.id.spiderAnswer12);
         btnSubmitSpiderData = findViewById(R.id.btnSubmitSpiderData);
         mDatabaseHelper = new DatabaseHelper(this);
 
@@ -36,19 +55,30 @@ public class SpiderInput extends AppCompatActivity {
                 int answer1 = spiderAnswer1.getProgress();
                 int answer2 = spiderAnswer2.getProgress();
                 int answer3 = spiderAnswer3.getProgress();
-                AddData(answer1, answer2, answer3);
+                int answer4 = spiderAnswer4.getProgress();
+                int answer5 = spiderAnswer5.getProgress();
+                int answer6 = spiderAnswer6.getProgress();
+                int answer7 = spiderAnswer7.getProgress();
+                int answer8 = spiderAnswer8.getProgress();
+                int answer9 = spiderAnswer9.getProgress();
+                int answer10 = spiderAnswer10.getProgress();
+                int answer11 = spiderAnswer11.getProgress();
+                int answer12 = spiderAnswer12.getProgress();
+                AddData(answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10, answer11, answer12);
             }
         });
     }
 
-    public void AddData(int answer1, int answer2, int answer3){
+    public void AddData(int answer1, int answer2, int answer3, int answer4, int answer5, int answer6, int answer7, int answer8, int answer9, int answer10, int answer11, int answer12){
         boolean empty = mDatabaseHelper.checkTableSpiderDataEmpty();
         boolean insertData;
         if(empty) {
-            insertData = mDatabaseHelper.createSpiderData(answer1, answer2, answer3);
+            Log.d(TAG, "Creating Data");
+            insertData = mDatabaseHelper.createSpiderData(answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10, answer11, answer12);
         }
         else {
-            insertData = mDatabaseHelper.updateSpiderData(answer1, answer2, answer3);
+            Log.d(TAG, "Updating Data");
+            insertData = mDatabaseHelper.updateSpiderData(answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10, answer11, answer12);
         }
 
         if(insertData){
@@ -56,7 +86,7 @@ public class SpiderInput extends AppCompatActivity {
             startActivity(new Intent(SpiderInput.this, MainActivity.class));
         }
         else{
-            toastMessage("Error with insertion!");
+            toastMessage("Error with insertion!!!!");
         }
     }
 

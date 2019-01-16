@@ -41,11 +41,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             USER_NAME + " TEXT, " + USER_SURNAME + " TEXT, " + USER_DOB + " DATE" + ");";
 
     private static final String CREATE_TABLE_SPIDER_DATA = "CREATE TABLE " + TABLE_SPIDER_DATA + " (" + SPIDER_ID + " INTEGER PRIMARY KEY, " +
-            SPIDER_QUESTION1 + " INTEGER, " + SPIDER_QUESTION2 + " INTEGER, " + SPIDER_QUESTION3 + " INTEGER, " + SPIDER_QUESTION4
-            + " INTEGER" + ");";
-//    + SPIDER_QUESTION5 + " INTEGER, " + SPIDER_QUESTION6 + " INTEGER, " + SPIDER_QUESTION7 + " INTEGER, "
-//            + SPIDER_QUESTION8 + " INTEGER, " + SPIDER_QUESTION9 + " INTEGER, " + SPIDER_QUESTION10 + " INTEGER, " + SPIDER_QUESTION11
-//            + " INTEGER, " + SPIDER_QUESTION12 + " INTEGER" + ");";
+            SPIDER_QUESTION1 + " INTEGER, " + SPIDER_QUESTION2 + " INTEGER, " + SPIDER_QUESTION3 + " INTEGER, " + SPIDER_QUESTION4 + " INTEGER, "
+            + SPIDER_QUESTION5 + " INTEGER, " + SPIDER_QUESTION6 + " INTEGER, " + SPIDER_QUESTION7 + " INTEGER, "
+            + SPIDER_QUESTION8 + " INTEGER, " + SPIDER_QUESTION9 + " INTEGER, " + SPIDER_QUESTION10 + " INTEGER, " + SPIDER_QUESTION11
+            + " INTEGER, " + SPIDER_QUESTION12 + " INTEGER" + ");";
 
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -126,20 +125,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return !empty;
     }
 
-    public boolean createSpiderData(int answer1, int answer2, int answer3, int answer4){
+    public boolean createSpiderData(int answer1, int answer2, int answer3, int answer4, int answer5, int answer6, int answer7, int answer8, int answer9, int answer10, int answer11, int answer12){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(SPIDER_QUESTION1, answer1);
         contentValues.put(SPIDER_QUESTION2, answer2);
         contentValues.put(SPIDER_QUESTION3, answer3);
         contentValues.put(SPIDER_QUESTION4, answer4);
+        contentValues.put(SPIDER_QUESTION5, answer5);
+        contentValues.put(SPIDER_QUESTION6, answer6);
+        contentValues.put(SPIDER_QUESTION7, answer7);
+        contentValues.put(SPIDER_QUESTION8, answer8);
+        contentValues.put(SPIDER_QUESTION9, answer9);
+        contentValues.put(SPIDER_QUESTION10, answer10);
+        contentValues.put(SPIDER_QUESTION11, answer11);
+        contentValues.put(SPIDER_QUESTION12, answer12);
 
         Log.d(TAG, "createSpiderData: (QUESTION1: " + answer1 + ", QUESTION2: " + answer2 + ", QUESTION3: " + answer3 + " QUESTION4: " + answer4 + ") to " + TABLE_SPIDER_DATA);
 
         long result = db.insert(TABLE_SPIDER_DATA, null, contentValues);
 
         if(result == -1) {
-            Log.e(TAG, "Error with insertion!");
+            Log.e(TAG, "Error with insertion!!");
             return false;
         }
         else {
@@ -160,20 +167,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         spiderDataList.add(data.getInt(2));
         spiderDataList.add(data.getInt(3));
         spiderDataList.add(data.getInt(4));
+        spiderDataList.add(data.getInt(5));
+        spiderDataList.add(data.getInt(6));
+        spiderDataList.add(data.getInt(7));
+        spiderDataList.add(data.getInt(8));
+        spiderDataList.add(data.getInt(9));
+        spiderDataList.add(data.getInt(10));
+        spiderDataList.add(data.getInt(11));
+        spiderDataList.add(data.getInt(12));
+
         data.close();
         return spiderDataList;
     }
 
-    public boolean updateSpiderData(int answer1, int answer2, int answer3, int answer4) {
+    public boolean updateSpiderData(int answer1, int answer2, int answer3, int answer4, int answer5, int answer6, int answer7, int answer8, int answer9, int answer10, int answer11, int answer12){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(SPIDER_QUESTION1, answer1);
         contentValues.put(SPIDER_QUESTION2, answer2);
         contentValues.put(SPIDER_QUESTION3, answer3);
         contentValues.put(SPIDER_QUESTION4, answer4);
+        contentValues.put(SPIDER_QUESTION5, answer5);
+        contentValues.put(SPIDER_QUESTION6, answer6);
+        contentValues.put(SPIDER_QUESTION7, answer7);
+        contentValues.put(SPIDER_QUESTION8, answer8);
+        contentValues.put(SPIDER_QUESTION9, answer9);
+        contentValues.put(SPIDER_QUESTION10, answer10);
+        contentValues.put(SPIDER_QUESTION11, answer11);
+        contentValues.put(SPIDER_QUESTION12, answer12);
         int result = db.update(TABLE_SPIDER_DATA, contentValues, null, null);
         if(result == 0) {
-            Log.e(TAG, "Error with insertion!");
+            Log.e(TAG, "Error with insertion!!!");
             return false;
         }
         else {
