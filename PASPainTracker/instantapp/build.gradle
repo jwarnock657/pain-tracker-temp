@@ -3,4 +3,5 @@ apply plugin: 'com.android.instantapp'
 dependencies {
     implementation project(':main')
     implementation project(':base')
+    api 'com.applandeo:material-calendar-view:1.0.1'
 }
