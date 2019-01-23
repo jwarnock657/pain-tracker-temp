@@ -95,6 +95,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(WHAT_HELPED, what_helped);
         contentValues.put(DATE, date);
         //contentValues.put(WHAT_DOING, what_doing)
+        Log.i(TAG, date);
 
         long result = db.insert(TABLE_PAIN_DATA, null, contentValues);
 
@@ -108,6 +109,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public List<String> getPainDates() {
+        Log.d(TAG, "Getting pain dates...");
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<String> painDateList = new ArrayList<String>();
+        String query = "SELECT " + DATE + " FROM " + TABLE_PAIN_DATA;
+        Cursor data = db.rawQuery(query, null);
+        data.moveToFirst();
+        Log.d(TAG, "Adding to painDateList...");
+        Log.i(TAG, data.getString(0));
+        while(data.moveToNext()){
+            painDateList.add(data.getString(0));
+            Log.i(TAG, data.getString(0));
+        }
+        data.close();
+        Log.i(TAG, "Returning Dates...");
+        return painDateList;
+    }
 
 
     public boolean createUserData(String name, String surname, String dateOfBirth){

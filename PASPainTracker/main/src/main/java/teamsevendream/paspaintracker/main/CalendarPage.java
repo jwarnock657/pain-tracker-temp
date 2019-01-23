@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.applandeo.materialcalendarview.CalendarView;
@@ -18,6 +19,10 @@ import java.util.List;
 
 public class CalendarPage extends AppCompatActivity {
 
+    private static String TAG = "CalendarPage";
+
+    DatabaseHelper mDatabaseHelper;
+
     public static final String RESULT = "result";
     public static final String EVENT = "event";
     private static final int ADD_NOTE = 44;
@@ -29,14 +34,13 @@ public class CalendarPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_page);
-
+        mDatabaseHelper = new DatabaseHelper(this);
         mCalendarView = (CalendarView) findViewById(R.id.calendarView);
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-//                addNote();
+            public void onClick(View v) { startActivity(new Intent(CalendarPage.this, RecordPain.class));
             }
         });
 
@@ -46,6 +50,8 @@ public class CalendarPage extends AppCompatActivity {
 //                previewNote(eventDay);
             }
         });
+
+        getEntries();
     }
 
     @Override
@@ -56,6 +62,18 @@ public class CalendarPage extends AppCompatActivity {
             mEventDays.add(myEventDay);
             mCalendarView.setEvents(mEventDays);
         }
+    }
+
+    private void getEntries(){
+        List<String> dates = mDatabaseHelper.getPainDates();
+        Intent intent = new Intent();
+        Log.i(TAG, "Adding to calendar...");
+        //MyEventDay myEventDay = intent.getParcelableExtra(RESULT);
+        MyEventDay myEventDay = new MyEventDay(Calendar.getInstance(), R.drawable.ic_launcher, "Hello");
+        Log.i(TAG, "Setting dates...");
+        mCalendarView.setDate(myEventDay.getCalendar());
+        mEventDays.add(myEventDay);
+        mCalendarView.setEvents(mEventDays);
     }
 
 //    private void addNote() {
