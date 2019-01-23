@@ -6,9 +6,11 @@ import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+//import android.support.v7.widget.DrawableUtils;
 import android.util.Log;
 import android.view.View;
 
+import com.applandeo.materialcalendarview.utils.ImageUtils;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
@@ -27,15 +29,22 @@ public class CalendarPage extends AppCompatActivity {
     public static final String EVENT = "event";
     private static final int ADD_NOTE = 44;
 
-    private CalendarView mCalendarView;
-    private List<EventDay> mEventDays = new ArrayList<>();
+//    private CalendarView mCalendarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_page);
+        List<EventDay> events = new ArrayList<>();
         mDatabaseHelper = new DatabaseHelper(this);
-        mCalendarView = (CalendarView) findViewById(R.id.calendarView);
+        Calendar calendar = Calendar.getInstance();
+
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.add(Calendar.DAY_OF_MONTH, 2);
+        events.add(new EventDay(calendar, R.drawable.ic_pet));
+
+        CalendarView mCalendarView = (CalendarView) findViewById(R.id.calendarView);
+        mCalendarView.setEvents(events);
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -51,31 +60,31 @@ public class CalendarPage extends AppCompatActivity {
             }
         });
 
-        getEntries();
+        //getEntries(intent, mCalendarView);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == ADD_NOTE && resultCode == RESULT_OK) {
-            MyEventDay myEventDay = data.getParcelableExtra(RESULT);
-            mCalendarView.setDate(myEventDay.getCalendar());
-            mEventDays.add(myEventDay);
-            mCalendarView.setEvents(mEventDays);
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (requestCode == ADD_NOTE && resultCode == RESULT_OK) {
+//            MyEventDay myEventDay = data.getParcelableExtra(RESULT);
+//            mCalendarView.setDate(myEventDay.getCalendar());
+//            mEventDays.add(myEventDay);
+//            mCalendarView.setEvents(mEventDays);
+//        }
+//    }
 
-    private void getEntries(){
-        List<String> dates = mDatabaseHelper.getPainDates();
-        Intent intent = new Intent();
-        Log.i(TAG, "Adding to calendar...");
-        //MyEventDay myEventDay = intent.getParcelableExtra(RESULT);
-        MyEventDay myEventDay = new MyEventDay(Calendar.getInstance(), R.drawable.ic_launcher, "Hello");
-        Log.i(TAG, "Setting dates...");
-        mCalendarView.setDate(myEventDay.getCalendar());
-        mEventDays.add(myEventDay);
-        mCalendarView.setEvents(mEventDays);
-    }
-
+//    private void getEntries(Intent data, CalendarView calendar){
+//        List<String> dates = mDatabaseHelper.getPainDates();
+//        Log.i(TAG, "Adding to calendar...");
+////        MyEventDay myEventDay = data.getParcelableExtra(RESULT);
+////        MyEventDay myEventDay = new MyEventDay(Calendar.getInstance(), R.drawable.ic_launcher, "Hello");
+//        events.add(new EventDay(Calendar.getInstance(), R.drawable.ic_baseline_add_24px));
+//        Log.i(TAG, "Setting dates...");
+////        mCalendarView.setDate(myEventDay.getCalendar());
+////        mEventDays.add(myEventDay);
+//        calendar.setEvents(events);
+//    }
+//
 //    private void addNote() {
 //        Intent intent = new Intent(this, AddNoteActivity.class);
 //        startActivityForResult(intent, ADD_NOTE);
