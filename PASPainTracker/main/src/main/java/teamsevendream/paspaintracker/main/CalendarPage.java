@@ -9,8 +9,8 @@ import android.os.Bundle;
 //import android.support.v7.widget.DrawableUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
-import com.applandeo.materialcalendarview.utils.ImageUtils;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
@@ -43,6 +43,9 @@ public class CalendarPage extends AppCompatActivity {
         calendar1.add(Calendar.DAY_OF_MONTH, 2);
         events.add(new EventDay(calendar, R.drawable.ic_pet));
 
+        events.add(new EventDay(calendar1, R.drawable.ic_pet));
+
+        Log.i(TAG, Integer.toString(events.size()));
         CalendarView mCalendarView = (CalendarView) findViewById(R.id.calendarView);
         mCalendarView.setEvents(events);
 
@@ -57,6 +60,9 @@ public class CalendarPage extends AppCompatActivity {
             @Override
             public void onDayClick(EventDay eventDay) {
 //                previewNote(eventDay);
+                Toast.makeText(getApplicationContext(),
+                        eventDay.getCalendar().getTime().toString() + " ",
+                        Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -99,44 +105,44 @@ public class CalendarPage extends AppCompatActivity {
 //    }
 }
 
-class MyEventDay extends EventDay implements Parcelable {
-    private String mNote;
-
-    MyEventDay(Calendar day, int imageResource, String note) {
-        super(day, imageResource);
-        mNote = note;
-    }
-
-    String getNote() {
-        return mNote;
-    }
-
-    private MyEventDay(Parcel in) {
-        super((Calendar) in.readSerializable(), in.readInt());
-        mNote = in.readString();
-    }
-
-    public static final Creator<MyEventDay> CREATOR = new Creator<MyEventDay>() {
-        @Override
-        public MyEventDay createFromParcel(Parcel in) {
-            return new MyEventDay(in);
-        }
-
-        @Override
-        public MyEventDay[] newArray(int size) {
-            return new MyEventDay[size];
-        }
-    };
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeSerializable(getCalendar());
-        parcel.writeInt(getImageResource());
-        parcel.writeString(mNote);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-}
+//class MyEventDay extends EventDay implements Parcelable {
+//    private String mNote;
+//
+//    MyEventDay(Calendar day, int imageResource, String note) {
+//        super(day, imageResource);
+//        mNote = note;
+//    }
+//
+//    String getNote() {
+//        return mNote;
+//    }
+//
+//    private MyEventDay(Parcel in) {
+//        super((Calendar) in.readSerializable(), in.readInt());
+//        mNote = in.readString();
+//    }
+//
+//    public static final Creator<MyEventDay> CREATOR = new Creator<MyEventDay>() {
+//        @Override
+//        public MyEventDay createFromParcel(Parcel in) {
+//            return new MyEventDay(in);
+//        }
+//
+//        @Override
+//        public MyEventDay[] newArray(int size) {
+//            return new MyEventDay[size];
+//        }
+//    };
+//
+//    @Override
+//    public void writeToParcel(Parcel parcel, int i) {
+//        parcel.writeSerializable(getCalendar());
+//        parcel.writeInt(getImageResource());
+//        parcel.writeString(mNote);
+//    }
+//
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
+//}
