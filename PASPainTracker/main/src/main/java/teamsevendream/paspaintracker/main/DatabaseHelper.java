@@ -3,6 +3,7 @@ package teamsevendream.paspaintracker.main;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -115,13 +116,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<String> painDateList = new ArrayList<String>();
         String query = "SELECT " + DATE + " FROM " + TABLE_PAIN_DATA;
         Cursor data = db.rawQuery(query, null);
+
         data.moveToFirst();
-        Log.d(TAG, "Adding to painDateList...");
-        Log.i(TAG, data.getString(0));
-        while(data.moveToNext()){
+
+        //if the first value is null then no dates in data, returns empty list
+        try{
+            //do once outside so it adds the first date
             painDateList.add(data.getString(0));
-            Log.i(TAG, data.getString(0));
+
+            while(data.moveToNext()){
+                painDateList.add(data.getString(0));
+                Log.i(TAG, data.getString(0));
+            }
         }
+        catch (CursorIndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+
         data.close();
         Log.i(TAG, "Returning Dates...");
         return painDateList;
