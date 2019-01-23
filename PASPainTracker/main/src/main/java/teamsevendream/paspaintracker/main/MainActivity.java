@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnViewSpider;
     private Button btnViewPersonalDetails;
     private Button btnRecordPain;
+    private Button btnCalendarPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         btnViewPersonalDetails = findViewById(R.id.btnViewPersonalDetails);
         btnRecordPain = findViewById(R.id.btnRecordPain);
         mDatabaseHelper = new DatabaseHelper(this);
+        btnCalendarPage = findViewById(R.id.btnViewHistory);
         setWelcomeMessage();
 
         btnRecordSpider.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 startActivity(new Intent(MainActivity.this, SpiderOutput.class));
+            }
+        });
+
+        btnCalendarPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                startActivity(new Intent(MainActivity.this, CalendarPage.class));
             }
         });
 

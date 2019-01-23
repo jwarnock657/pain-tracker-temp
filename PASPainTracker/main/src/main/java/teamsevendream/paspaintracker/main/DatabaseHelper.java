@@ -3,6 +3,7 @@ package teamsevendream.paspaintracker.main;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -95,6 +96,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(WHAT_HELPED, what_helped);
         contentValues.put(DATE, date);
         //contentValues.put(WHAT_DOING, what_doing)
+        Log.i(TAG, date);
 
         long result = db.insert(TABLE_PAIN_DATA, null, contentValues);
 
@@ -108,6 +110,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public List<String> getPainDates() {
+        Log.d(TAG, "Getting pain dates...");
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<String> painDateList = new ArrayList<String>();
+        String query = "SELECT " + DATE + " FROM " + TABLE_PAIN_DATA;
+        Cursor data = db.rawQuery(query, null);
+
+        data.moveToFirst();
+
+        //if the first value is null then no dates in data, returns empty list
+        try{
+            //do once outside so it adds the first date
+            painDateList.add(data.getString(0));
+
+            while(data.moveToNext()){
+                painDateList.add(data.getString(0));
+                Log.i(TAG, data.getString(0));
+            }
+        }
+        catch (CursorIndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+
+        data.close();
+        Log.i(TAG, "Returning Dates...");
+        return painDateList;
+    }
 
 
     public boolean createUserData(String name, String surname, String dateOfBirth){

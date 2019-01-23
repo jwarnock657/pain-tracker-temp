@@ -68,7 +68,7 @@ public class RecordPain extends AppCompatActivity {
                                 if ((monthOfYear+ 1) <= 9) {
                                     fixedMonth = "0"+Integer.toString(monthOfYear + 1);
                                 }
-                                dateInput = fixedDay + fixedMonth + Integer.toString(year);
+                                dateInput = fixedDay + "/" + fixedMonth + "/" +Integer.toString(year);
                             }
                         }, year, month, day);
                 picker.show();
