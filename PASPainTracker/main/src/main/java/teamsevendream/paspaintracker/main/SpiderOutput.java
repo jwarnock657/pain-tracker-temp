@@ -60,12 +60,12 @@ public class SpiderOutput extends AppCompatActivity {
         }
         //viewSpiderOutput();
 
-        btnGoHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                startActivity(new Intent(SpiderOutput.this, MainActivity.class));
-            }
-        });
+//        btnGoHome.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view){
+//                startActivity(new Intent(SpiderOutput.this, MainActivity.class));
+//            }
+//        });
     }
 
     //private void viewSpiderOutput() {
