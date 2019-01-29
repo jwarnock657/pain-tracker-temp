@@ -6,15 +6,18 @@
         <activity android:name=".StartActivity">
             <intent-filter android:order="1">
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data
                     android:host="pas-pain-tracker"
                     android:pathPattern="/.*"
-                    android:scheme="https"
-                />
+                    android:scheme="https" />
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
@@ -22,6 +25,8 @@
         <activity android:name=".PersonalView" />
         <activity android:name=".SpiderInput" />
         <activity android:name=".SpiderOutput" />
+        <activity android:name=".RecordPain" />
+        <activity android:name=".CalendarPage"></activity>
     </application>
 
 </manifest>

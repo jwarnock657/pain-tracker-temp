@@ -3,6 +3,7 @@ package teamsevendream.paspaintracker.main;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -37,6 +38,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String SPIDER_QUESTION11 = "question11";
     private static final String SPIDER_QUESTION12 = "question12";
 
+    private static final String TABLE_PAIN_DATA = "painData";
+    private static final String PAIN_ID = "painID";
+    private static final String PAIN_DATA = "painData";
+    private static final String INTENSITY = "intensity";
+    private static final String AREA = "area";
+    private static final String DETAILS = "details";
+    private static final String WHAT_HELPED = "whatHelped";
+    private static final String DATE = "date";
+    //private static final String WHAT_DOING = "whatDoing";
+
+
     private static final String CREATE_TABLE_USER_DATA = "CREATE TABLE " + TABLE_USER_DATA + " (" + USER_ID + " INTEGER PRIMARY KEY, " +
             USER_NAME + " TEXT, " + USER_SURNAME + " TEXT, " + USER_DOB + " DATE" + ");";
 
@@ -46,6 +58,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + SPIDER_QUESTION8 + " INTEGER, " + SPIDER_QUESTION9 + " INTEGER, " + SPIDER_QUESTION10 + " INTEGER, " + SPIDER_QUESTION11
             + " INTEGER, " + SPIDER_QUESTION12 + " INTEGER" + ");";
 
+    /*
+    private static final String CREATE_TABLE_PAIN_DATA = "CREATE TABLE " + TABLE_PAIN_DATA + " (" + PAIN_ID + " INTEGER PRIMARY KEY, "
+            + PAIN_DATA + " TEXT, " + INTENSITY + " INTEGER, " + AREA + " TEXT, " + DETAILS + " TEXT, " + WHAT_HELPED + " TEXT, "
+            + WHAT_DOING + " TEXT" + ");";
+     */
+
+    private static final String CREATE_TABLE_PAIN_DATA = "CREATE TABLE " + TABLE_PAIN_DATA + " (" + PAIN_ID + " INTEGER PRIMARY KEY, "
+            + INTENSITY + " INTEGER, " + AREA + " TEXT, " + DETAILS + " TEXT, " + WHAT_HELPED + " TEXT, " + DATE + " TEXT" + ");";
+
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -54,14 +75,93 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
         db.execSQL(CREATE_TABLE_USER_DATA);
         db.execSQL(CREATE_TABLE_SPIDER_DATA);
+        db.execSQL(CREATE_TABLE_PAIN_DATA);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER_DATA);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SPIDER_DATA);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PAIN_DATA);
         onCreate(db);
     }
+
+    public boolean createPainData(int intensity, String area, String details, String what_helped, String date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(INTENSITY, intensity);
+        contentValues.put(AREA, area);
+        contentValues.put(DETAILS, details);
+        contentValues.put(WHAT_HELPED, what_helped);
+        contentValues.put(DATE, date);
+        //contentValues.put(WHAT_DOING, what_doing)
+        Log.i(TAG, date);
+
+        long result = db.insert(TABLE_PAIN_DATA, null, contentValues);
+
+        if(result == -1) {
+            Log.e(TAG, "Error with insertion!");
+            return false;
+        }
+        else {
+            Log.d(TAG, "Pain Data added successfully!");
+            return true;
+        }
+    }
+
+    public List<String> getPainDates() {
+        Log.d(TAG, "Getting pain dates...");
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<String> painDateList = new ArrayList<String>();
+        String query = "SELECT " + DATE + " FROM " + TABLE_PAIN_DATA;
+        Cursor data = db.rawQuery(query, null);
+
+        data.moveToFirst();
+
+        //if the first value is null then no dates in data, returns empty list
+        try{
+            //do once outside so it adds the first date
+            painDateList.add(data.getString(0));
+
+            while(data.moveToNext()){
+                painDateList.add(data.getString(0));
+                Log.i(TAG, data.getString(0));
+            }
+        }
+        catch (CursorIndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+
+        data.close();
+        Log.i(TAG, "Returning Dates...");
+        return painDateList;
+    }
+
+    public List<String> getPainData(){
+        Log.d(TAG, "Getting pain data...");
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<String> userPainList = new ArrayList<String>();
+        String query = "SELECT * FROM " + TABLE_PAIN_DATA;
+        Cursor data = db.rawQuery(query, null);
+        data.moveToFirst();
+        Log.d(TAG, "Adding to userPainList...");
+        try{
+            //do once outside so it adds the first bit of pain data
+            userPainList.add(data.getString(0));
+
+            while(data.moveToNext()){
+                userPainList.add(data.getString(0));
+                Log.i(TAG, data.getString(0));
+            }
+        }
+        catch (CursorIndexOutOfBoundsException e) {
+            e.printStackTrace();
+            Log.e(TAG, "Error getting pain data...");
+        }
+        data.close();
+        return userPainList;
+    }
+
 
     public boolean createUserData(String name, String surname, String dateOfBirth){
         SQLiteDatabase db = this.getWritableDatabase();

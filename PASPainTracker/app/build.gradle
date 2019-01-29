@@ -2,6 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     defaultConfig {
         applicationId "teamsevendream.paspaintracker.app"
         minSdkVersion 15
@@ -25,6 +30,7 @@ dependencies {
     implementation project(':main')
     implementation project(':base')
     api 'com.numetriclabz.numandroidcharts:numandroidcharts:1.0.13'
+    api 'com.applandeo:material-calendar-view:1.5.1'
 
 }
 
