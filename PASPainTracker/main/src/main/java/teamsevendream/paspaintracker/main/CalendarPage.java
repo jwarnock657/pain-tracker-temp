@@ -53,11 +53,11 @@ public class CalendarPage extends AppCompatActivity {
         //mCalendarView.setEvents(events);
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { startActivity(new Intent(CalendarPage.this, RecordPain.class));
-            }
-        });
+        //floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            //@Override
+           // public void onClick(View v) { startActivity(new Intent(CalendarPage.this, RecordPain.class));
+            //}
+        //});
 
         mCalendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
