@@ -62,10 +62,13 @@ public class CalendarPage extends AppCompatActivity {
         mCalendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
             public void onDayClick(EventDay eventDay) {
-//                previewNote(eventDay);
-                Toast.makeText(getApplicationContext(),
-                        eventDay.getCalendar().getTime().toString() + " ",
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),
+//                        eventDay.getCalendar().getTime().toString() + " ",
+//                        Toast.LENGTH_SHORT).show();
+
+                Intent i = new Intent(this, ViewPain.class);
+                i.putExtra("date", eventDay.getCalendar().getTime().toString());
+                startActivity(i);
             }
         });
 

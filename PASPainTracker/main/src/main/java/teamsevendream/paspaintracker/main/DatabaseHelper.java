@@ -138,6 +138,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return painDateList;
     }
 
+    public List<String> getPainData(){
+        Log.d(TAG, "Getting pain data...");
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<String> userPainList = new ArrayList<String>();
+        String query = "SELECT * FROM " + TABLE_PAIN_DATA;
+        Cursor data = db.rawQuery(query, null);
+        data.moveToFirst();
+        Log.d(TAG, "Adding to userPainList...");
+        try{
+            //do once outside so it adds the first bit of pain data
+            userPainList.add(data.getString(0));
+
+            while(data.moveToNext()){
+                userPainList.add(data.getString(0));
+                Log.i(TAG, data.getString(0));
+            }
+        }
+        catch (CursorIndexOutOfBoundsException e) {
+            e.printStackTrace();
+            Log.e(TAG, "Error getting pain data...");
+        }
+        data.close();
+        return userPainList;
+    }
+
 
     public boolean createUserData(String name, String surname, String dateOfBirth){
         SQLiteDatabase db = this.getWritableDatabase();
