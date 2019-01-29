@@ -180,7 +180,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="4: THIS IS QUESTION 4, BUT I COULD NOT THINK OF A QUESTION"
+                android:text="4: QUESTION 4"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
                 />
@@ -231,7 +231,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="5: WHAT SHOULD I ASK THEN"
+                android:text="5: QUESTION 5"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
                 />
@@ -282,7 +282,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="6: LET'S SAY SOMETHING BULLSHIT"
+                android:text="6: QUESTION 6"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
                 />
@@ -334,7 +334,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="7: YEAAA, AGREED"
+                android:text="7: QUESTION 7"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
                 />
@@ -385,7 +385,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="8: HHHHHH"
+                android:text="8: QUESTION 8"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
                 />
@@ -436,7 +436,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="9: WHERE IS THE PAIN HURT?"
+                android:text="9: QUESTION 9"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
                 />
@@ -487,7 +487,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="10: THAT'S NOT A GOOD QUESTION!"
+                android:text="10: QUESTION 10"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
                 />
@@ -538,7 +538,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="11: HOW WE ABLE TO ANSWER THIS THROUGH THE SEEKBAR???"
+                android:text="11: QUESTION 11"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
                 />
@@ -589,7 +589,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="12: EXACTLYYYY!!!!"
+                android:text="12: QUESTION 12"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
                 />
