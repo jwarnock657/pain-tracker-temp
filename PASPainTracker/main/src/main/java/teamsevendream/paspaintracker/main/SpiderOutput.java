@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class SpiderOutput extends AppCompatActivity {
@@ -38,13 +39,35 @@ public class SpiderOutput extends AppCompatActivity {
         label.add("Question4");
         label.add("Question5");
         label.add("Question6");
+        label.add("Question7");
+        label.add("Question8");
+        label.add("Question9");
+        label.add("Question10");
+        label.add("Question11");
+        label.add("Question12");
         ArrayList<Float> entries = new ArrayList<>();
-        entries.add(4f);
-        entries.add(3f);
-        entries.add(2f);
-        entries.add(3f);
-        entries.add(4f);
-        entries.add(1f);
+        List<Integer> data = mDatabaseHelper.getSpiderData();
+        //entries.add(0f);
+        //entries.add(1f);
+        //entries.add(2f);
+        //entries.add(3f);
+        //entries.add(4f);
+        //entries.add(5f);
+
+        entries.add((float) (data.get(0)));
+        entries.add(data.get(1).floatValue());
+        entries.add((float) (data.get(1)));
+        entries.add((float) data.get(2));
+        entries.add((float) data.get(3));
+        entries.add((float) data.get(4));
+        entries.add((float) data.get(5));
+        entries.add((float) data.get(6));
+        entries.add((float) data.get(7));
+        entries.add((float) data.get(8));
+        entries.add((float) data.get(9));
+        entries.add((float) data.get(10));
+        entries.add((float) data.get(11));
+
         try {
             JSONObject dataSet = new JSONObject();
             dataSet.put("labels", label.toString());
@@ -60,22 +83,19 @@ public class SpiderOutput extends AppCompatActivity {
         }
         //viewSpiderOutput();
 
-//        btnGoHome.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view){
-//                startActivity(new Intent(SpiderOutput.this, MainActivity.class));
-//            }
-//        });
+    //    btnGoHome.setOnClickListener(new View.OnClickListener() {
+    //        @Override
+    //        public void onClick(View view){
+    //            startActivity(new Intent(SpiderOutput.this, MainActivity.class));
+    //        }
+    //    });
     }
 
     //private void viewSpiderOutput() {
-    //    List<Integer> data = mDatabaseHelper.getSpiderData();
-    //    spiderAnswer1.setText("Answer: " + data.get(0).toString());
-    //    spiderAnswer2.setText("Answer: " + data.get(1).toString());
-    //    spiderAnswer3.setText("Answer: " + data.get(2).toString());
+        //List<Integer> data = mDatabaseHelper.getSpiderData();
+        //spiderAnswer1.setText("Answer: " + data.get(0).toString());
+        //spiderAnswer2.setText("Answer: " + data.get(1).toString());
+        //spiderAnswer3.setText("Answer: " + data.get(2).toString());
     //}
-
-
-
 
 }
