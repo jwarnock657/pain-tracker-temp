@@ -62,13 +62,25 @@ public class CalendarPage extends AppCompatActivity {
         mCalendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
             public void onDayClick(EventDay eventDay) {
+//                Toast.makeText(getApplicationContext(),
+//                        eventDay.getCalendar().getTime().toString() + " ",
+//                        Toast.LENGTH_SHORT).show();
+                for(int i = 0; i < events.size(); i ++) {
+                    Log.d(TAG, events.get(i).getCalendar().getTime().toString());
+                    Log.d(TAG, eventDay.getCalendar().getTime().toString());
+                    if (events.get(i).getCalendar().getTime().equals(eventDay.getCalendar().getTime())) {
+
+                        Intent j = new Intent(CalendarPage.this, ViewPain.class);
+                        j.putExtra("date", eventDay.getCalendar().getTime().toString());
+                        Log.d(TAG, "showing pain page...");
+                        startActivity(j);
+
+                    }
+                }
                 Toast.makeText(getApplicationContext(),
                         eventDay.getCalendar().getTime().toString() + " ",
                         Toast.LENGTH_SHORT).show();
 
-//                Intent i = new Intent(this, ViewPain.class);
-//                i.putExtra("date", eventDay.getCalendar().getTime().toString());
-//                startActivity(i);
             }
         });
 

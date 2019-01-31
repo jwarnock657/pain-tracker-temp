@@ -137,11 +137,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return painDateList;
     }
 
-    public List<String> getPainData(){
+    public List<String> getPainData(String date){
         Log.d(TAG, "Getting pain data...");
         SQLiteDatabase db = this.getWritableDatabase();
         List<String> userPainList = new ArrayList<String>();
-        String query = "SELECT * FROM " + TABLE_PAIN_DATA;
+        String query = "SELECT * FROM " + TABLE_PAIN_DATA + " WHERE " + DATE + " = '" + date + "'";
         Cursor data = db.rawQuery(query, null);
         data.moveToFirst();
         Log.d(TAG, "Adding to userPainList...");
