@@ -27,6 +27,7 @@
         <activity android:name=".SpiderOutput" />
         <activity android:name=".RecordPain" />
         <activity android:name=".CalendarPage"></activity>
+        <activity android:name=".ViewPain"></activity>
     </application>
 
 </manifest>
